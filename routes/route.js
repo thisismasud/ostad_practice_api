@@ -8,9 +8,9 @@
 //dependencies
 const express = require("express");
 const router = express.Router();
+const ProfileController = require("../controllers/ProfileController");
 
-router.get("/hello", (req, res) => {
-  res.json("Hello How are you");
-});
+router.post("/signup", ProfileController.signup);
+
 //module exports
 module.exports = router;
