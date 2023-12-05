@@ -43,9 +43,9 @@ app.use(limiter);
 
 //mongoDB connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Todo")
+  .connect("mongodb://127.0.0.1:27017/Todo", { autoIndex: true }) //autoIndex is optional, but I used it for get unique indexes exp: username
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.log("err"));
+  .catch((err) => console.log(err.message));
 
 //Routing implementation
 app.use("/api/v1", router);

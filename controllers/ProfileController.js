@@ -1,13 +1,13 @@
 /**
- * Title: Profile Information controller
- * Description: This is a Profile controller it basically handle profile related actions (CRUD OPERATIONS).
+ * Title: Profile Information controller (Creates a  New user/profile)
+ * Description: This is a Profile controller it basically handle profile related actions).
  * Author: Masud Parvez
  * Date: 2023-12-04
  */
 //dependencies
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const SignupModel = require("../models/SignupModel");
+const ProfileModel = require("../models/ProfileModel");
 
 //module scaffolding
 controller = {};
@@ -15,7 +15,7 @@ controller = {};
 //creates a new profile
 controller.signup = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.Password, 10);
-  const newProfile = new SignupModel({
+  const newProfile = new ProfileModel({
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
     EmailAddress: req.body.EmailAddress,
@@ -25,12 +25,12 @@ controller.signup = async (req, res) => {
     Password: hashedPassword,
   });
   try {
-    await SignupModel.create(newProfile);
+    await ProfileModel.create(newProfile);
     res.status(200).json({
-      msg: "User created successfully",
+      msg: "Profile created successfully",
     });
   } catch {
-    res.status(500).json({ msg: "Could Not save data" });
+    res.status(500).json({ msg: "Could Not create new profile" });
   }
 };
 

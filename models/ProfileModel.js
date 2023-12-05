@@ -35,12 +35,12 @@ const DataSchema = mongoose.Schema(
       },
     },
     City: { type: String },
-    UserName: { type: String },
+    UserName: { type: String, unique: true }, //username will be unique
     Password: { type: String },
   },
   { versionKey: false }
 );
 
-const SignupModel = new mongoose.model("profile", DataSchema);
+const ProfileModel = new mongoose.model("profile", DataSchema);
 
-module.exports = SignupModel;
+module.exports = ProfileModel;
