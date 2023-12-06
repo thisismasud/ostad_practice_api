@@ -15,7 +15,16 @@ const LoginController = require("../controllers/LoginController");
 //routes
 router.post("/signup", ProfileController.signup);
 router.post("/login", LoginController.login);
-router.get("/viewdata", checkLogin, LoginController.viewdata);
+
+//view profile route
+router.get("/viewprofiledata", checkLogin, ProfileController.viewprofiledata);
+
+//update profile route
+router.post(
+  "/updateprofiledata",
+  checkLogin,
+  ProfileController.updateprofiledata
+);
 
 //module exports
 module.exports = router;

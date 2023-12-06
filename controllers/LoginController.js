@@ -13,6 +13,7 @@ const ProfileModel = require("../models/ProfileModel");
 //module scaffolding
 const controller = {};
 
+//profile/user login
 controller.login = async (req, res) => {
   try {
     const user = await ProfileModel.find({ UserName: req.body.UserName });
@@ -50,17 +51,6 @@ controller.login = async (req, res) => {
   } catch (err) {
     res.status(404).json({ msg: err.message });
   }
-};
-
-//TODO: Delete this section (viewdata) later, just for testing purpose **/
-controller.viewdata = (req, res) => {
-  const id = req.UserId;
-  const username = req.UserName;
-  // const Query = {_id: id}
-  res.status(200).json({
-    id: id,
-    username: username,
-  });
 };
 
 //module exports
