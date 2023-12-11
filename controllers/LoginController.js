@@ -19,13 +19,14 @@ controller.login = async (req, res) => {
     const user = await ProfileModel.find({ UserName: req.body.UserName });
     if (user && user.length > 0) {
       //validating password
+      //bcrypt.compare returns true or false
       const isValidPassword = await bcrypt.compare(
         req.body.Password,
         user[0].Password
       );
 
       if (isValidPassword) {
-        //generate token
+        //generate tokenalif
         const token = await jwt.sign(
           {
             UserId: user[0]._id,

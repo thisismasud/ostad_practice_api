@@ -61,14 +61,13 @@ controller.updateprofiledata = async (req, res) => {
     const data = await ProfileModel.findOneAndUpdate(
       { UserName: username },
       updateData,
-      {
-        new: true,
-      }
+      { new: true }
     );
     res.status(200).json({ msg: "Data Updated successfully", data: data });
   } catch (err) {
     res.status(500).json(err.message);
   }
 };
+
 //exports module
 module.exports = controller;

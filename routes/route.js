@@ -11,8 +11,9 @@ const router = express.Router();
 const checkLogin = require("../middlewares/AuthVerifyMiddleware");
 const ProfileController = require("../controllers/ProfileController");
 const LoginController = require("../controllers/LoginController");
+const TodoListController = require("../controllers/TodoListController");
 
-//routes
+//routes for user/profile
 router.post("/signup", ProfileController.signup);
 router.post("/login", LoginController.login);
 
@@ -25,6 +26,9 @@ router.post(
   checkLogin,
   ProfileController.updateprofiledata
 );
+
+//routes for Todo
+router.post("/createtodo", checkLogin, TodoListController.createtodo);
 
 //module exports
 module.exports = router;
