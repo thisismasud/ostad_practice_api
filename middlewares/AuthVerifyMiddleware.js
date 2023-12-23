@@ -31,7 +31,7 @@ const checkLogin = async (req, res, next) => {
       });
     }
   } catch (error) {
-    res.status(401).json({ msg: "Authorization failure" });
+    res.status(401).json({ msg: error.message });
     console.log(`JWT Verification Error: ${error.message}`);
   }
 };

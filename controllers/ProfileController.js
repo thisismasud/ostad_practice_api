@@ -43,7 +43,7 @@ controller.viewprofiledata = async (req, res) => {
     const data = await ProfileModel.findOne({ UserName: username }, projection);
     res.status(200).json(data);
   } catch {
-    res.status(500).json({ msg: "User not found" });
+    res.status(500).json({ msg: "Data not found" });
   }
 };
 
