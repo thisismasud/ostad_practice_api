@@ -6,6 +6,7 @@
  */
 
 const mongoose = require("mongoose");
+const TodoModel = require("./TodoModel");
 
 const DataSchema = mongoose.Schema(
   {
@@ -37,10 +38,16 @@ const DataSchema = mongoose.Schema(
     City: { type: String },
     UserName: { type: String, unique: true }, //username will be unique
     Password: { type: String },
+    Todos: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Todo",
+      },
+    ],
   },
   { versionKey: false }
 );
 
-const ProfileModel = new mongoose.model("profile", DataSchema);
+const ProfileModel = mongoose.model("profile", DataSchema);
 
 module.exports = ProfileModel;

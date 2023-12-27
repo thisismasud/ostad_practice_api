@@ -6,19 +6,24 @@
  */
 
 const mongoose = require("mongoose");
+const ProfileModel = require("./ProfileModel");
 
-const DataSchema = mongoose.Schema(
+const DataSchema = new mongoose.Schema(
   {
-    UserName: { type: String },
-    TodoSubject: { type: String },
-    TodoDesc: { type: String },
-    TodoCreateDate: { type: Date },
-    TodoUpdateDate: { type: Date },
-    TodoStatus: { type: String },
+    UserName: String,
+    TodoSubject: String,
+    TodoDesc: String,
+    TodoCreateDate: Date,
+    TodoUpdateDate: Date,
+    TodoStatus: String,
+    User: {
+      type: mongoose.Types.ObjectId,
+      ref: "profile",
+    },
   },
   { versionKey: false }
 );
 
-const TodoModel = new mongoose.model("Todo", DataSchema);
+const TodoModel = mongoose.model("Todo", DataSchema);
 
 module.exports = TodoModel;

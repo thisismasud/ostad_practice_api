@@ -7,6 +7,7 @@
 //dependencies
 const mongoose = require("mongoose");
 const TodoModel = require("../models/TodoModel");
+const ProfileModel = require("../models/ProfileModel");
 
 //module scaffolding
 controller = {};
@@ -20,9 +21,17 @@ controller.createTodo = async (req, res) => {
     TodoCreateDate: Date.now(),
     TodoUpdateDate: Date.now(),
     TodoStatus: "New",
+    User: req.UserId,
   };
   try {
-    await TodoModel.create(todo);
+    const todoData = await TodoModel.create(todo);
+
+    //creating relation with profile Model. updates the profile every time someone create a new todo.
+    await ProfileModel.updateOne(
+      { _id: req.UserId },
+      { $push: { Todos: todoData._id } }
+    );
+
     res.status(200).json("Todo Created Successfully");
   } catch (err) {
     res.status(500).json({ msg: "Error creating Todo", err: err.message });
@@ -31,9 +40,10 @@ controller.createTodo = async (req, res) => {
 
 //viewtodo
 controller.viewTodo = async (req, res) => {
-  const username = req.UserName;
   try {
-    const todoData = await TodoModel.find({ UserName: username });
+    const todoData = await TodoModel.find({ User: req.UserId })
+      .select({ _id: 0 })
+      .populate("User", "FirstName + EmailAddress"); //creating relation with profilemodel, second parameter indicates which fields to view in response
     res.status(200).json({ Data: todoData });
   } catch (err) {
     res.status(500).json({ msg: err.message });

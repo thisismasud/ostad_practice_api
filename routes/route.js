@@ -13,8 +13,8 @@ const ProfileController = require("../controllers/ProfileController");
 const LoginController = require("../controllers/LoginController");
 const TodoListController = require("../controllers/TodoListController");
 
-/** ===================================================================== */
-//* ROUTES FOR USER/PROFILE
+//* ROUTES FOR USER/PROFILE ===================================================================== */
+
 router.post("/signup", ProfileController.signup);
 router.post("/login", LoginController.login);
 
@@ -28,8 +28,7 @@ router.post(
   ProfileController.updateprofiledata
 );
 
-/** ===================================================================== */
-//* ROUTES FOR TODO
+//* ROUTES FOR TODO ===================================================================== */
 router.post("/createtodo", checkLogin, TodoListController.createTodo);
 router.get("/viewtodo", checkLogin, TodoListController.viewTodo);
 router.post("/updatetodo", checkLogin, TodoListController.updateTodo);
